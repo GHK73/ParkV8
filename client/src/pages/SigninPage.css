@@ -1,0 +1,66 @@
+.landing-container {
+  width: 100vw;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f2f6fc;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.landing-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.landing-header h1 {
+  font-size: 2rem;
+  color: #123375;
+}
+
+.landing-header p {
+  font-size: 1rem;
+  color: #354063;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  background: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(18,51,117,0.09);
+  gap: 1rem;
+}
+
+input, button {
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+button {
+  background: #123375;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 500;
+}
+
+button:hover {
+  background: #1a469c;
+}
+
+.error-msg {
+  color: red;
+  margin-top: 10px;
+}
+
+.success-msg {
+  color: green;
+  margin-top: 10px;
+}

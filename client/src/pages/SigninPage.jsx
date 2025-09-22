@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SigninPage.css";
 
 function SigninPage({ handleSignin }) {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // <-- Add this
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,7 +17,11 @@ function SigninPage({ handleSignin }) {
     e.preventDefault();
     setLoading(true);
     const res = await handleSignin(form.email, form.password);
-    if (!res.success) setError(res.error);
+    if (!res.success) {
+      setError(res.error);
+    } else {
+      navigate("/");      // <-- Redirect to home on success
+    }
     setLoading(false);
   };
 

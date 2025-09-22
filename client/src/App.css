@@ -99,3 +99,23 @@
   color: #888;
   text-align: center;
 }
+.menu-dropdown {
+  position: absolute;
+  top: 36px; /* adjust as needed */
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  min-width: 140px;
+  z-index: 1000;
+}
+.menu-item {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1rem;
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { background: #f2f6fc; }
+.user-menu { display: inline-block; position: relative; }
+.user-display { font-size: 1.4rem; padding: 4px 12px; }

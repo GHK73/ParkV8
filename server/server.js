@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import { DBConnection } from './database/db.js';
+import authRouter from './routes/auth.js'; 
+import otpRouter from './routes/otp.js';
 
 dotenv.config();
 
@@ -14,6 +16,9 @@ const PORT = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
 DBConnection();
+
+app.use('/api/auth', authRouter);
+app.use('/api/otp', otpRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is running on https://localhost:${PORT}`);

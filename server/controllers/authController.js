@@ -65,6 +65,7 @@ export const signin = async(req, res) =>{
         );
         return res.status(200).json({message:"Login Successfull",
             token,
+            name: user.name,
             email: user.email,
             role: user.role,
         });

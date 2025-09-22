@@ -1,7 +1,7 @@
 //controllers/otpGenerate.js
 
 import Otp from "../models/Otp.js";
-import sendMail from "../utils/sendMail.js";
+import {sendMail} from "../utils/sendMail.js";
 import crypto from "crypto";
 
 export const generateOtp = async(req,res)=>{

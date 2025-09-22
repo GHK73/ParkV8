@@ -41,3 +41,35 @@ export const signup = async(req, res)=>{
         return res.status(500).json({message:"Server error"});
     }
 };
+
+export const signin = async(req, res) =>{
+    try{
+        const {email,password} = req.body;
+        if(!email || !password){
+            return res.status(400).json({message:"Enter both Email and Password"});
+        }
+        const user = await User.findOne(email);
+        if(!user){
+            return res.status(400).json({message:"Email not found"});
+        }
+        const isPasswrodMatch = await bcrypt.compare(password,user.password);
+        if(!isPasswordMatch){
+            return res.status(400).json({message: "Wrong Passwrod"});
+        }
+        const token = jwt.sign({
+            name : user.name,
+            email : user.email,
+            role : user.role,
+        },JWT_SECRET,
+        { expiresIn: '2h' }
+        );
+        return res.status(200).json({message:"Login Successfull",
+            token,
+            email: user.email,
+            role: user.role,
+        });
+    }catch(error){
+        console.error('Error during signin:', error);
+        return res.status(500).json({message: "Server error"});
+    }
+};

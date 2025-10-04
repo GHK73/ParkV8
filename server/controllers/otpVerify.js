@@ -6,7 +6,7 @@ export const verifyOtp = async(req,res)=>{
     try{
         const {email, otp,purpose} = req.body;
         if(!email || !otp || !purpose){
-            return res.status(500).json({message: "Email,Otp and purpose are required"});
+            return res.status(400).json({message: "Email,Otp and purpose are required"});
         }
         const existingOtp = await Otp.findOne({email,purpose});
         if(!existingOtp){

@@ -33,6 +33,12 @@ export async function verifyOtp(email, otp, purpose) {
   return response.data;
 }
 
+// Forgot password: Reset password request
+export async function resetPassword(email, otp, newPassword) {
+  const response = await api.post("/password-reset/reset", { email, otp, newPassword });
+  return response.data;
+}
+
 // Set JWT token for future requests (call after login)
 export function setAuthToken(token) {
   api.defaults.headers.common["Authorization"] = `Bearer ${token}`;

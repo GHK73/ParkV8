@@ -5,19 +5,17 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import SigninPage from "./pages/SigninPage";
+import ForgotPassword from "./pages/ForgotPassword"; // Use this component
 import { signin, setAuthToken, signup, generateOtp, verifyOtp } from "./api";
 
 function App() {
   const [user, setUser] = useState(null);
 
-  // Restore user from JWT on app load/refresh with error logging
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    console.log("JWT from localStorage:", token); // Log token for debugging
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        console.log("Decoded JWT:", decoded); // Log decoded token
         const now = Date.now() / 1000;
         if (decoded.exp && decoded.exp > now) {
           setUser({
@@ -25,20 +23,18 @@ function App() {
             email: decoded.email || "Unknown",
             role: decoded.role || "customer",
           });
-          setAuthToken(token); // Set Axios default header
+          setAuthToken(token);
         } else {
           setUser(null);
           localStorage.removeItem("jwt");
         }
       } catch (err) {
-        console.error("JWT decode failed:", err);
         setUser(null);
         localStorage.removeItem("jwt");
       }
     }
   }, []);
 
-  // Auth handler for signin
   const handleSignin = async (email, password) => {
     try {
       const res = await signin({ email, password });
@@ -61,29 +57,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<Layout user={user} setUser={setUser} />}
-        >
+        <Route path="/" element={<Layout user={user} setUser={setUser} />}>
           <Route index element={<HomePage />} />
-          <Route
-            path="signup"
-            element={
-              <SignupPage
-                signup={signup}
-                generateOtp={generateOtp}
-                verifyOtp={verifyOtp}
-              />
-            }
-          />
-          <Route
-            path="signin"
-            element={
-              <SigninPage
-                handleSignin={handleSignin}
-              />
-            }
-          />
+          <Route path="signup" element={
+            <SignupPage signup={signup} generateOtp={generateOtp} verifyOtp={verifyOtp} />
+          } />
+          <Route path="signin" element={
+            <SigninPage handleSignin={handleSignin} />
+          } />
+          <Route path="forgot-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

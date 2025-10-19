@@ -53,19 +53,10 @@ function SigninPage({ handleSignin }) {
             {loading ? "Signing in..." : "Signin"}
           </button>
           {error && <div className="error-msg">{error}</div>}
-          <div style={{ textAlign: "right", marginTop: "0.5rem" }}>
+          <div className="forgot-btn-wrapper">
             <button
               type="button"
               className="forgot-btn"
-              style={{
-                background: "none",
-                border: "none",
-                color: "#1976d2",
-                cursor: "pointer",
-                padding: 0,
-                textDecoration: "underline",
-                fontSize: "0.98rem"
-              }}
               onClick={() => navigate("/forgot-password")}
             >
               Forgot Password?

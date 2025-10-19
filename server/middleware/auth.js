@@ -2,7 +2,7 @@
 
 import jwt from 'jsonwebtoken';
 
-export const authenticationToken = (req,res,next)=>{
+export const authenticateToken = (req,res,next)=>{
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
@@ -11,7 +11,7 @@ export const authenticationToken = (req,res,next)=>{
     }
 
     jwt.verify(token,process.env.SECRET_KEY,(err,user)=>{
-        if(err) return res.status(403).json({message:"Forbidden: Invalid Tokken"});
+        if(err) return res.status(403).json({message:"Forbidden: Invalid Token"});
         req.user = user;
         next();
     });
@@ -21,7 +21,7 @@ export const authorizeRoles = (...allowedRoles)=>{
     return (req,res,next)=>{
         const userRole = req.user?.role;
         if(!userRole || !allowedRoles.includes(userRole)){
-            return res.status(403).json({message:"Forbidden: You do not have permission to acess this resource"});
+            return res.status(403).json({message:"Forbidden: You do not have permission to access this resource"});
         }
         next();
     };
